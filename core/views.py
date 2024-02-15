@@ -32,6 +32,7 @@ def home(request):
                     "phone_number": phone_number,
                     "email": email,
                     "additional_notes": additional_notes,
+                    "company_website": COMPANY_WEBSITE
                 },
             )
 
