@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %} {% block title %}Welcome{% endblock title %}
+{%block content %}
+<div class="grid-container">
+    <div class="grid-item child-1">{% include "core/hero.html" %}</div>
+    <div class="grid-item child-2">{% include "core/about.html" %}</div>
+    <div class="grid-item child-3">{% include "core/contact.html" %}</div>
+</div>
+{% endblock content %}

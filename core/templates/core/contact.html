@@ -1,0 +1,13 @@
+{% load static %}
+<section class="contact-section">
+    <button type="button" class="order-cta">Order Now</button>
+    <dialog data-modal backdrop="static">
+        <form class="contact-form" method="POST">
+            <div>{% csrf_token %} {{form.as_p}}</div>
+            <div class="form-cta">
+                <button type="submit">Submit</button>
+                <button type="button" data-close-modal>Close</button>
+            </div>
+        </form>
+    </dialog>
+</section>

@@ -1,0 +1,44 @@
+{% load static %}
+<div class="navbar">
+    <div class="grid-navbar container">
+        <a href="/" class="grid-navbar-item grid-navbar-child-1 logo"
+            >Hei<span>Cakes!</span>
+        </a>
+        <img
+            role="navigation"
+            aria-label="Main Navigation Menu"
+            id="mobile-cta"
+            class="mobile-menu"
+            src="{% static '/images/menu-open.svg' %}"
+            alt="Open navbar menu"
+            width="16"
+            height="16"
+        />
+        <nav class="grid-navbar-item grid-navbar-child-2">
+            <img
+                id="mobile-exit"
+                class="mobile-menu"
+                src="{% static '/images/menu-close.svg' %}"
+                alt="Close navbar menu"
+                width="16"
+                height="16"
+            />
+            <ul class="grid-nav">
+                <li class="grid-nav-item grid-nav-child-1">
+                    <a href="/">Home</a>
+                </li>
+                <li class="grid-nav-item grid-nav-child-2">
+                    <a id="about-section" href="#about">About</a>
+                </li>
+                <li class="grid-nav-item grid-nav-child-3">
+                    <a href="https://www.instagram.com/heicakesusa/"
+                        >Gallery</a
+                    >
+                </li>
+                <li class="grid-nav-item grid-nav-child-4">
+                    <a href="" class="order-cta">Order</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
