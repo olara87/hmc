@@ -24,6 +24,7 @@ def home(request):
             phone_number: str = request_form.cleaned_data["phone_number"]
             email: str = request_form.cleaned_data["email"]
             additional_notes: str = request_form.cleaned_data["additional_notes"]
+            company_website = str(COMPANY_WEBSITE)
 
             html: str = render_to_string(
                 "core/email/contact_form.html",
@@ -32,11 +33,11 @@ def home(request):
                     "phone_number": phone_number,
                     "email": email,
                     "additional_notes": additional_notes,
-                    "company_website": COMPANY_WEBSITE
+                    "company_website": company_website
                 },
             )
 
-            subject: str = str(COMPANY_WEBSITE).join(" | New Order")
+            subject: str = company_website + " | New Order"
 
             recipient_list: list[str] = [str(EMAIL_HOST_USER), str(EMAIL_HOST_COMPANY)]
 
