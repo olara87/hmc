@@ -157,7 +157,7 @@ USE_TZ = env("USE_TZ")
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "hmc/hmc/static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "hmc/static"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Default primary key field type
