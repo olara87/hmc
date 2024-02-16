@@ -12,7 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from environ import Env
 import dj_database_url
+
+
+env = Env()
+Env.read_env()
+ENVIRONMENT = env("ENVIRONMENT")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,15 +29,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get("DEBUG")) == "1"
+DEBUG = str(env("DEBUG")) == "1"
 
-ALLOWED_HOSTS = [os.environ.get("COMPANY_WEBSITE"), os.environ.get("RAILWAY_DOMAIN")]
+ALLOWED_HOSTS = [env("COMPANY_WEBSITE"), env("RAILWAY_DOMAIN")]
+
 
 if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get("ALLOWED_HOST")]
+    ALLOWED_HOSTS += [env("ALLOWED_HOST")]
+
 
 
 # Application definition
@@ -91,6 +100,11 @@ WSGI_APPLICATION = "hmc.wsgi.application"
 
 # Original SQLite3 database setup:
 
+
+DATABASES = {}
+DATABASES["default"] = dj_database_url.parse(env("DATABASE_URL"))
+
+
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
@@ -98,19 +112,18 @@ WSGI_APPLICATION = "hmc.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("ENGINE"),
-        "NAME": os.environ.get("NAME"),
-        "USER": os.environ.get("USER"),
-        "PASSWORD": os.environ.get("PASSWORD"),
-        "HOST": os.environ.get("HOST"),
-        "PORT": os.environ.get("PORT"),  # default PostgreSQL port
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": env("ENGINE"),
+            "NAME": env("NAME"),
+            "USER": env("USER"),
+            "PASSWORD": env("PASSWORD"),
+            "HOST": env("HOST"),
+            "PORT": env("PORT"),  # default PostgreSQL port
 
+        }
     }
-}
-
-DATABASES["default"] = dj_database_url.parse(os.environ.get("DATABASE_URL"))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -134,10 +147,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE")
-TIME_ZONE = os.environ.get("TIME_ZONE")
-USE_I18N = os.environ.get("USE_I18N")
-USE_TZ = os.environ.get("USE_TZ")
+LANGUAGE_CODE = env("LANGUAGE_CODE")
+TIME_ZONE = env("TIME_ZONE")
+USE_I18N = env("USE_I18N")
+USE_TZ = env("USE_TZ")
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -154,11 +167,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ===================================================================
 # This is to send emails from django project
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = os.environ.get("EMAIL_PORT")
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_COMPANY = os.environ.get("EMAIL_HOST_COMPANY")
-COMPANY_WEBSITE = os.environ.get("COMPANY_WEBSITE")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_COMPANY = env("EMAIL_HOST_COMPANY")
+COMPANY_WEBSITE = env("COMPANY_WEBSITE")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
 # ===================================================================
