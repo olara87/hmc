@@ -34,12 +34,14 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(env("DEBUG")) == "1"
 
-ALLOWED_HOSTS = [env("COMPANY_WEBSITE"), env("RAILWAY_DOMAIN")]
+ALLOWED_HOSTS = [env("ALLOWED_HOST"), env("LOCAL_HOST"), env("RAILWAY_DOMAIN")]
 
+CSRF_TRUSTED_ORIGINS = [env("CSRF_TRUSTED_ORIGINS")]
 
-if not DEBUG:
-    ALLOWED_HOSTS += [env("ALLOWED_HOST")]
-
+INTERNAL_IPS = (
+    env("ALLOWED_HOST"),
+    env("LOCAL_HOST"),
+)
 
 
 # Application definition
@@ -121,7 +123,6 @@ if DEBUG:
             "PASSWORD": env("PASSWORD"),
             "HOST": env("HOST"),
             "PORT": env("PORT"),  # default PostgreSQL port
-
         }
     }
 
