@@ -17,8 +17,8 @@ import dj_database_url
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = Env()
-Env.read_env(os.path.join(BASE_DIR, 'hmc/.env'))
+env = Env(DEBUG=(bool, False))
+# Env.read_env(os.path.join(BASE_DIR, 'hmc/.env')) #Taken out due to not being in django-environ quick start
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
