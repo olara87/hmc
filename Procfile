@@ -1,1 +1,1 @@
-web: gunicorn hmc.wsgi --log-file -
+web: gunicorn --chdir hmc wsgi:app port:5432
