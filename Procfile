@@ -1,1 +1,1 @@
-web: gunicorn hmc.wsgi --bind "0.0.0.0:8000"
+web: gunicorn -w 3 hmc.wsgi --log-file -
