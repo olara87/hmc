@@ -1,1 +1,1 @@
-web: gunicorn -w 3 hmc.wsgi --log-file -
+web: gunicorn -w 3 hmc.wsgi:application --log-file -
