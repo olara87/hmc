@@ -1,1 +1,1 @@
-gunicorn hmc.wsgi
+web: gunicorn hmc.wsgi
