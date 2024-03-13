@@ -16,7 +16,6 @@ media
 invoice/
 orders/
 products/
-staticfiles/
 static/
 unused-files/
 

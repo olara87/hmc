@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@400;700&display=swap");
+
+:root {
+    --primary-color-menu: rgba(194, 136, 43, 0.95);
+    --primary-color-light: #c2882c;
+    --primary-color-normal: #c27e10;
+    --primary-color-dark: #9b794a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    height: 100vh;
+}
+
+/* temporary - to be removed */
+img {
+    display: none;
+}
+
+footer ul{
+    display: none;
+}
+
+
+.grid-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 6fr 2fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.grid-body-item {
+    background-color: rgb(144, 95, 233);
+    border: 1px solid rgb(90, 15, 230);
+    border-radius: 10px;
+}
+
+.grid-navbar {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.grid-navbar-item {
+    background-color: rgb(172, 140, 233);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.grid-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.grid-nav-item {
+    background-color: rgb(172, 140, 233);
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}

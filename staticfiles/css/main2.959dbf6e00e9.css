@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #5353fd;
+    --secondary-color: #6e6efd;
+    --background-color: #4848db;
+}
+
+body {
+    background: var(--background-color);
+    font-family: "Poppins";
+}
+
+.navbar {
+    padding: 1rem;
+    background: #fff;
+}
+
+.container {
+    display: flex;
+    place-content: space-between;
+}
+
+.container img {
+    width: 25px;
+}
+
+.logo {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+nav {
+    display: none;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.hero {
+    padding: 5em 2em;
+    text-align: center;
+}
+
+.left-col {
+    margin-bottom: 1em;
+}
+
+.left-col p {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: grey;
+    letter-spacing: 0.3em;
+}
+
+.left-col h1 {
+    font-size: 2.5em;
+    line-height: 1.3em;
+    margin-top: 0.2em;
+}
+
+.hero-cta {
+}
+
+.hero-cta a {
+    width: 20%;
+    margin: 2rem auto;
+}
+
+.right-col img {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.order-cta {
+    padding: 0.5em 1em;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50px;
+}
+
+.hero-image {
+    border-radius: 50px;
+}
+
+.left-col-footer ul {
+    display: flex;
+    place-content: space-between;
+    list-style-type: none;
+}
+
+nav {
+    position: fixed;
+    z-index: 999;
+    width: 66%;
+    right: 0;
+    top: 0;
+    background: var(--background-color);
+    height: 100vh;
+    padding: 1em;
+}
+
+.mobile-btn {
+    display: block;
+}
+
+nav ul {
+    margin-top: 5em;
+}
+
+nav ul li {
+    display: block;
+    padding: 0.5em;
+    font-size: 1.3em;
+    text-align: right;
+}
+
+nav ul li a:hover {
+    color: grey;
+}
+
+nav img {
+    width: 25px;
+    float: right;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+    .mobile-menu-open,
+    .mobile-menu-exit {
+        display: none;
+    }
+
+    .logo {
+        margin: auto;
+    }
+
+    .navbar .container {
+        display: grid;
+        grid-template-columns: 180px auto;
+        text-align: center;
+    }
+
+    .navbar nav {
+        display: flex;
+        justify-content: space-between;
+        background: none;
+        position: unset;
+        height: auto;
+        width: 100%;
+        padding: 0;
+    }
+
+    .navbar nav ul {
+        display: flex;
+        margin: 0;
+    }
+
+    .navbar nav ul a {
+        color: var(--primary-color);
+    }
+}
+
+.contact-form p {
+    display: flex;
+    flex-direction: column;
+}

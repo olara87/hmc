@@ -1,0 +1,322 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Poppins:wght@400;700&display=swap");
+
+:root {
+    --primary-color-menu: rgba(194, 136, 43, 0.95);
+    --primary-color-light: #c2882c;
+    --primary-color-normal: #c27e10;
+    --primary-color-dark: #9b794a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    padding: 0 1em;
+}
+img {
+    border-radius: 8px;
+}
+
+button {
+    color: white;
+    padding: 0.8em;
+    width: 115px;
+    background-color: var(--primary-color-normal);
+    text-transform: uppercase;
+    border: 0.2rem solid var(--primary-color-normal);
+    border-radius: 0.5rem;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--primary-color-light);
+    font-weight: bolder;
+}
+
+/* navbar.html */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    padding: 1em 0;
+}
+
+.container {
+    display: flex;
+    place-content: space-between;
+}
+
+.logo {
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+}
+
+.logo span {
+    color: var(--primary-color-light);
+}
+
+#mobile-cta {
+    cursor: pointer;
+}
+
+#mobile-exit {
+    float: right;
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+
+nav.mobile-btn {
+    display: block;
+}
+
+nav {
+    display: none;
+    position: fixed;
+    padding: 0.5em 1em;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    min-width: 50%;
+    background-color: var(--primary-color-menu);
+}
+
+nav ul {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 5em;
+}
+
+nav ul li a {
+    display: block;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0.5em;
+    width: 100%;
+    margin: 0 auto;
+    text-align: right;
+}
+
+li a:hover {
+    font-weight: bold;
+}
+
+/* hero.html */
+
+.dj-message {
+    text-align: center;
+}
+
+.subheader {
+    text-transform: uppercase;
+    font-size: small;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.hero-left-col,
+.about-left-col {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.hero-right-col img,
+.about-right-col img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* about.html */
+
+.p-about {
+    text-align: justify;
+    padding-bottom: 1em;
+}
+
+/* contact form css */
+
+.contact-section {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.contact-section .order-cta {
+    width: 200px;
+}
+
+.form-cta {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-form textarea,
+.contact-form input {
+    width: 100%;
+}
+
+/* this is used to center the modal when 'Order Now' is clicked */
+dialog {
+    margin: auto;
+    padding: 1em;
+}
+
+footer {
+    padding-bottom: 1em;
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    gap: 1em;
+}
+
+.p-footer {
+    text-align: justify;
+    font-size: 0.9rem;
+}
+
+.ul-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    border-left: 1px solid rgb(216, 216, 216);
+    padding-left: 1em;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}
+
+/* Responsive Design */
+@media only screen and (min-width: 768px) {
+    #mobile-cta,
+    #mobile-exit {
+        display: none;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: 100px auto;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo {
+        font-size: larger;
+    }
+
+    nav {
+        display: block;
+        background: none;
+        position: unset;
+        height: auto;
+        width: 100%;
+        padding: 0;
+    }
+
+    nav ul {
+        display: flex;
+        margin: 0;
+    }
+
+    nav ul li a {
+        color: black;
+    }
+
+    .title {
+        padding: 1em 0;
+    }
+
+    .hero-right-col img,
+    .about-right-col img {
+        height: 630px;
+    }
+
+    .about-section {
+        padding: 1em 0;
+    }
+
+    footer {
+        padding: 1em 0;
+    }
+
+    .p-footer {
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .ul-footer {
+        font-size: 1em;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    body {
+        padding: 4em;
+    }
+
+    nav {
+        font-size: large;
+    }
+
+    .logo {
+        font-size: xx-large;
+    }
+
+    .grid-hero,
+    .grid-about {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 4.5em 0;
+    }
+
+    .hero-left-col {
+        margin: auto 0;
+        padding: 4em;
+    }
+
+    .title {
+        padding-bottom: 8em;
+        font-size: xx-large;
+    }
+
+    .subheader {
+        font-size: large;
+    }
+
+    .hero-cta {
+        justify-content: space-evenly;
+        padding: 0 4em;
+    }
+
+    .about-section {
+        font-size: x-large;
+        align-items: center;
+    }
+
+    .about-left-col {
+        padding: 0 4em;
+    }
+
+    .about-right-col img {
+        height: 500px;
+    }
+
+    .p-footer, .ul-footer {
+        font-size: x-large;
+        justify-content: space-between;
+        gap: 0;
+    }
+}
