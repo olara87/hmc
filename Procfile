@@ -1,1 +1,1 @@
-web: gunicorn hmc.wsgi
+web: gunicorn hmc.wsgi:app --bind "0.0.0.0":8000"
