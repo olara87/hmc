@@ -20,7 +20,7 @@ def home(request):
                 "Thank you for your submission. A representative will reach out shortly.",
             )
 
-            name: str = request_form.cleaned_data["name"]
+            name: str = request_form.cleaned_data["first_name"] + " " + request_form.cleaned_data["last_name"]
             phone_number: str = request_form.cleaned_data["phone_number"]
             email: str = request_form.cleaned_data["email"]
             additional_notes: str = request_form.cleaned_data["additional_notes"]

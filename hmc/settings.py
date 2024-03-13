@@ -12,12 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-from environ import Env
-import dj_database_url
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-env = Env(DEBUG=(bool, False))
 # Env.read_env(os.path.join(BASE_DIR, 'hmc/.env')) #Taken out due to not being in django-environ quick start
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,18 +25,18 @@ env = Env(DEBUG=(bool, False))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = env("SECRET_KEY")
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(env("DEBUG")) == "1"
-
-ALLOWED_HOSTS = [env("ALLOWED_HOST"), env("LOCAL_HOST"), env("RAILWAY_DOMAIN")]
-
-CSRF_TRUSTED_ORIGINS = [env("CSRF_TRUSTED_ORIGINS")]
+DEBUG = str(os.environ.get("DEBUG")) == "1"
+ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST")
+ALLOWED_HOSTS = []
+if ENV_ALLOWED_HOST:
+    ALLOWED_HOSTS = [ENV_ALLOWED_HOST]
+# CSRF_TRUSTED_ORIGINS = [os.environ.get("CSRF_TRUSTED_ORIGINS")]
 
 INTERNAL_IPS = (
-    env("ALLOWED_HOST"),
-    env("LOCAL_HOST"),
+    os.environ.get("ALLOWED_HOST"),
+    os.environ.get("LOCAL_HOST"),
 )
 
 
@@ -54,6 +51,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Apps
     "core",
+    # "products",
+    # "orders",
     # "invoice", #removed
     # AWS
     # "storages",
@@ -101,29 +100,12 @@ WSGI_APPLICATION = "hmc.wsgi.application"
 
 # Original SQLite3 database setup:
 
-
-DATABASES = {}
-DATABASES["default"] = dj_database_url.parse(env("DATABASE_URL"))
-
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
-if DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": env("ENGINE"),
-            "NAME": env("NAME"),
-            "USER": env("USER"),
-            "PASSWORD": env("PASSWORD"),
-            "HOST": env("HOST"),
-            "PORT": env("PORT"),  # default PostgreSQL port
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -147,17 +129,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = env("LANGUAGE_CODE")
-TIME_ZONE = env("TIME_ZONE")
-USE_I18N = env("USE_I18N")
-USE_TZ = env("USE_TZ")
+LANGUAGE_CODE = "en-us"
+
+TIME_ZONE = "UTC"
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "hmc/static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" #This line is for testing. enable to line below for the original variable.
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
@@ -168,11 +152,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # ===================================================================
 # This is to send emails from django project
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_PORT = env("EMAIL_PORT")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_COMPANY = env("EMAIL_HOST_COMPANY")
-COMPANY_WEBSITE = env("COMPANY_WEBSITE")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_COMPANY = os.environ.get("EMAIL_HOST_COMPANY")
+COMPANY_WEBSITE = os.environ.get("COMPANY_WEBSITE")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
 # ===================================================================
