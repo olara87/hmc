@@ -28,16 +28,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get("DEBUG")) == "1"
+
 ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST")
 ALLOWED_HOSTS = []
+
 if ENV_ALLOWED_HOST:
     ALLOWED_HOSTS = [ENV_ALLOWED_HOST]
-# CSRF_TRUSTED_ORIGINS = [os.environ.get("CSRF_TRUSTED_ORIGINS")]
 
-INTERNAL_IPS = (
-    os.environ.get("ALLOWED_HOST"),
-    os.environ.get("LOCAL_HOST"),
-)
+# INTERNAL_IPS = (
+#     os.environ.get("ALLOWED_HOST"),
+#     os.environ.get("LOCAL_HOST"),
+# )
 
 
 # Application definition
