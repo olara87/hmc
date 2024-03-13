@@ -1,1 +1,1 @@
-web: gunicorn --chdir hmc wsgi
+gunicorn hmc.wsgi
