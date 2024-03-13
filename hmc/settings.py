@@ -28,20 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get("DEBUG")) == "1"
-
-ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST")
-ALLOWED_HOSTS = ["hmc-production.up.railway.app", "heicakes.com"]
-
-if ENV_ALLOWED_HOST:
-    ALLOWED_HOSTS = [ENV_ALLOWED_HOST]
-
-# INTERNAL_IPS = (
-#     os.environ.get("ALLOWED_HOST"),
-#     os.environ.get("LOCAL_HOST"),
-# )
-
-
-# Application definition
+print(DEBUG)
+ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST") or None
+ALLOWED_HOSTS = []
+if not DEBUG:
+    ALLOWED_HOSTS += [os.environ.get("ENV_ALLOWED_HOST")]
+    ALLOWED_HOSTS += [os.environ.get("COMPANY_WEBSITE")]
+print(ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -64,7 +57,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # installed libraries
-    # "django_browser_reload.middleware.BrowserReloadMiddleware", #removed
     "whitenoise.middleware.WhiteNoiseMiddleware",
     # installed libraries end
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -97,17 +89,6 @@ WSGI_APPLICATION = "hmc.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# Original SQLite3 database setup:
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 # Postgres database
 
 DATABASES = {
@@ -118,7 +99,7 @@ DATABASES = {
         "PASSWORD": os.environ.get("DB_PASSWORD"),
         "HOST": os.environ.get("DB_HOST"),
         "PORT": os.environ.get("DB_PORT"),
-    }  
+    }
 }
 
 # Password validation
@@ -144,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
@@ -154,8 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STORAGES = {
     "staticfiles": {
