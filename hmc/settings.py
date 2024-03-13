@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = str(os.environ.get("DEBUG")) == "1"
 
 ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST")
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["hmc-production.up.railway.app", "heicakes.com"]
 
 if ENV_ALLOWED_HOST:
     ALLOWED_HOSTS = [ENV_ALLOWED_HOST]
