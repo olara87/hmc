@@ -1,1 +1,1 @@
-web: gunicorn --chdir hmc wsgi:app port:5432
+web: gunicorn --chdir hmc wsgi
