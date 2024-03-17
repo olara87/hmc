@@ -31,8 +31,14 @@ DEBUG = str(os.environ.get("DEBUG")) == "1"
 ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST") or None
 ALLOWED_HOSTS = []
 if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get("ENV_ALLOWED_HOST")]
-    ALLOWED_HOSTS += [os.environ.get("COMPANY_WEBSITE")]
+    ALLOWED_HOSTS += [
+        str(os.environ.get("ENV_ALLOWED_HOST")),
+        str(os.environ.get("COMPANY_WEBSITE")),
+        str(os.environ.get("ALLOWED_HOST")),
+        str(os.environ.get("LOCAL_HOST")),
+    ]
+
+CSRF_TRUSTED_ORIGINS = ["https://hmc-production.up.railway.app", "https://heicakes.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -133,7 +139,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
+    BASE_DIR / "static",  # os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
