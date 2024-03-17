@@ -1,21 +1,25 @@
+{% extends "core/base.html" %}
 {% load static %}
-<section class="grid-about about-section">
-    <div class="grid-about-item grid-about-child-1 about-left-col">
-        <p class="p-about" id="about">
-            Welcome to our small home bakery! We specialize in creating
-            delicious baked goods made with high-quality ingredients and lots of
-            love. From pastries to cakes and cookies, we offer a variety of
-            treats to satisfy your sweet tooth. Our goal is to provide our
-            customers with a warm and welcoming experience, where they can
-            indulge in our homemade goodies while feeling like part of the
-            family. Come visit us and taste the difference that comes from
-            baking with care and attention to detail.
+{% block title %}About{% endblock title %}
+{% block content %}
+<section class="about-section">
+    <div class="about-left-col">
+        <p class="p-about">
+            Welcome to our cozy bakery, where each treat is meticulously crafted
+            with care and quality ingredients for a delightful experience. From
+            pastries to cakes, our range of delicious options is sure to please.
+            We're dedicated to exceptional customer service, ensuring a warm,
+            personalized experience tailored to you. Indulge in our handmade
+            goodies, crafted with passion and attention to detail. Taste the
+            difference that comes from our commitment to excellence.
         </p>
     </div>
-    <div class="grid-about-item grid-about-child-2 about-right-col">
+    <div class="about-right-col">
         <img
-            src="{% static '/images/heidyprofile.jpg' %}"
+            class="about-img"
+            src="{% static '/img/heidyprofile.jpg' %}"
             alt="Heidy's photo."
         />
     </div>
 </section>
+{% endblock content %}

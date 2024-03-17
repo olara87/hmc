@@ -1,13 +1,15 @@
+{% extends "core/base.html" %}
 {% load static %}
+{% block content %}
 <section class="contact-section">
-    <button type="button" class="order-cta">Order Now</button>
+    <form class="contact-form" method="POST" contact-form>
+        <h1>Contact Form</h1>
+        {% csrf_token %} {{form.as_p}}
+        <button type="submit" submit-button>Submit</button>
+    </form>
     <dialog data-modal backdrop="static">
-        <form class="contact-form" method="POST">
-            <div>{% csrf_token %} {{form.as_p}}</div>
-            <div class="form-cta">
-                <button type="submit">Submit</button>
-                <button type="button" data-close-modal>Close</button>
-            </div>
-        </form>
+        <p id="modal-text">Your form has been submitted. Thank you.</p>
+        <a href="{% url "core:home" %}">Home</a>
     </dialog>
 </section>
+{% endblock content %}

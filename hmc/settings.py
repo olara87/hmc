@@ -28,13 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get("DEBUG")) == "1"
-print(DEBUG)
 ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST") or None
 ALLOWED_HOSTS = []
 if not DEBUG:
     ALLOWED_HOSTS += [os.environ.get("ENV_ALLOWED_HOST")]
     ALLOWED_HOSTS += [os.environ.get("COMPANY_WEBSITE")]
-print(ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -138,7 +136,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static", # os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",

@@ -9,6 +9,12 @@ from .forms import ContactForm
 
 
 def home(request):
+    return render(request, "core/home.html")
+
+def about(request):
+    return render(request, "core/about.html")
+
+def contact(request):
     request_form = ContactForm()
     if request.method == "POST":
         request_form = ContactForm(request.POST)
@@ -20,11 +26,17 @@ def home(request):
                 "Thank you for your submission. A representative will reach out shortly.",
             )
 
-            name: str = request_form.cleaned_data["first_name"] + " " + request_form.cleaned_data["last_name"]
+            name: str = (
+                request_form.cleaned_data["first_name"]
+                + " "
+                + request_form.cleaned_data["last_name"]
+            )
             phone_number: str = request_form.cleaned_data["phone_number"]
             email: str = request_form.cleaned_data["email"]
             additional_notes: str = request_form.cleaned_data["additional_notes"]
             company_website = str(COMPANY_WEBSITE)
+
+            print(name, phone_number, email, additional_notes)
 
             html: str = render_to_string(
                 "core/email/contact_form.html",
@@ -33,7 +45,7 @@ def home(request):
                     "phone_number": phone_number,
                     "email": email,
                     "additional_notes": additional_notes,
-                    "company_website": company_website
+                    "company_website": company_website,
                 },
             )
 
@@ -48,10 +60,9 @@ def home(request):
                 recipient_list,
                 fail_silently=True,
                 html_message=html,
-            ) 
+            )
 
             return redirect("core:home")
 
     context: dict[str, ContactForm] = {"form": request_form}
-
-    return render(request, "core/home.html", context)
+    return render(request, "core/contact.html", context)
