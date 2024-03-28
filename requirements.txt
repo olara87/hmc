@@ -1,4 +1,4 @@
-Django==4.2.5
+Django
 gunicorn
 requests
 django-dotenv
