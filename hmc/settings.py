@@ -28,17 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get("DEBUG")) == "1"
-ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST") or None
+LOCAL_IP = os.environ.get("LOCAL_IP")
+LOCAL_HOST = os.environ.get("LOCAL_HOST")
+ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST")
 ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS += [
-        str(os.environ.get("ENV_ALLOWED_HOST")),
-        str(os.environ.get("COMPANY_WEBSITE")),
-        str(os.environ.get("ALLOWED_HOST")),
-        str(os.environ.get("LOCAL_HOST")),
-    ]
-
-CSRF_TRUSTED_ORIGINS = ["https://hmc-production.up.railway.app", "https://heicakes.com"]
+if ENV_ALLOWED_HOST and not DEBUG:
+    ALLOWED_HOSTS = [ ENV_ALLOWED_HOST, LOCAL_IP, LOCAL_HOST ]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -93,18 +88,38 @@ WSGI_APPLICATION = "hmc.wsgi.application"
 
 
 # Database
-# Postgres database
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("DB_ENGINE"),
-        "NAME": os.environ.get("DB_NAME"),
-        "USER": os.environ.get("DB_USER"),
-        "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "HOST": os.environ.get("DB_HOST"),
-        "PORT": os.environ.get("DB_PORT"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# Postgres database
+
+DB_ENGINE = os.environ.get("DB_ENGINE")
+DB_USERNAME = os.environ.get("DB_USERNAME")
+DB_PASSWORD = os.environ.get("DB_PASSWORD")
+DB_DATABASE = os.environ.get("DB_DATABASE")
+DB_HOST = os.environ.get("DB_HOST")
+DB_PORT = os.environ.get("DB_PORT")
+
+DB_IS_AVAIL = all([DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_PORT])
+# DB_READY = str(os.environ.get("DB_READY")) == "1"
+# if DB_IS_AVAIL and DB_READY:
+
+if DB_IS_AVAIL and not DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": DB_ENGINE,
+            "NAME": DB_DATABASE,
+            "USER": DB_USERNAME,
+            "PASSWORD": DB_PASSWORD,
+            "HOST": DB_HOST,
+            "PORT": DB_PORT,
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -137,7 +152,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",  # os.path.join(BASE_DIR, 'static')
 ]
@@ -147,9 +162,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" #This line is for testing. enable to line below for the original variable.
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

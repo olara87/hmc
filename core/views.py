@@ -7,12 +7,16 @@ from hmc.settings import EMAIL_HOST_USER, EMAIL_HOST_COMPANY, COMPANY_WEBSITE
 
 from .forms import ContactForm
 
+from time import sleep
+
 
 def home(request):
     return render(request, "core/home.html")
 
+
 def about(request):
     return render(request, "core/about.html")
+
 
 def contact(request):
     request_form = ContactForm()
@@ -23,7 +27,7 @@ def contact(request):
             request_form.save()
             messages.success(
                 request,
-                "Thank you for your submission. A representative will reach out shortly.",
+                "Your form has been submitted. Thank you.",
             )
 
             name: str = (
@@ -35,8 +39,6 @@ def contact(request):
             email: str = request_form.cleaned_data["email"]
             additional_notes: str = request_form.cleaned_data["additional_notes"]
             company_website = str(COMPANY_WEBSITE)
-
-            print(name, phone_number, email, additional_notes)
 
             html: str = render_to_string(
                 "core/email/contact_form.html",
@@ -61,7 +63,9 @@ def contact(request):
                 fail_silently=True,
                 html_message=html,
             )
-
+            sleep(
+                5
+            )  # 5 seconds before redirect is executed if user does not click on "home" button on dialog tag.
             return redirect("core:home")
 
     context: dict[str, ContactForm] = {"form": request_form}
