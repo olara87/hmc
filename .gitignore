@@ -19,6 +19,7 @@ products/
 static/
 staticfiles/
 local-cdn/
+.kube/
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
@@ -138,6 +139,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.prod
 .venv
 env/
 venv/

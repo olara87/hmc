@@ -31,9 +31,10 @@ DEBUG = str(os.environ.get("DEBUG")) == "1"
 LOCAL_IP = os.environ.get("LOCAL_IP")
 LOCAL_HOST = os.environ.get("LOCAL_HOST")
 ENV_ALLOWED_HOST = os.environ.get("ENV_ALLOWED_HOST")
+ALLOWED_IP = os.environ.get("ALLOWED_IP")
 ALLOWED_HOSTS = []
 if ENV_ALLOWED_HOST and not DEBUG:
-    ALLOWED_HOSTS = [ ENV_ALLOWED_HOST, LOCAL_IP, LOCAL_HOST ]
+    ALLOWED_HOSTS = [ ENV_ALLOWED_HOST, LOCAL_IP, LOCAL_HOST, ALLOWED_IP ]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -109,6 +110,8 @@ DB_IS_AVAIL = all([DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_PORT])
 # DB_READY = str(os.environ.get("DB_READY")) == "1"
 # if DB_IS_AVAIL and DB_READY:
 
+DB_IGNORE_SSL = os.environ.get("DB_IGNORE_SSL") == "true"
+
 if DB_IS_AVAIL and not DEBUG:
     DATABASES = {
         "default": {
@@ -120,6 +123,11 @@ if DB_IS_AVAIL and not DEBUG:
             "PORT": DB_PORT,
         }
     }
+
+    if not DB_IGNORE_SSL:
+        DATABASES["default"]["OPTIONS"] = {
+            "sslmode": "require"
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -153,10 +161,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
+
+STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # os.path.join(BASE_DIR, 'static')
+    BASE_DIR / "staticfiles",  # os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
@@ -167,7 +178,7 @@ STORAGES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
+from .cdn.conf import * # noqa
 # ===================================================================
 # This is to send emails from django project
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
