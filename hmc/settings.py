@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     # "orders",
     # "invoice", #removed
     # AWS
-    # "storages",
+    "storages",
     # installed libraries
     # "django_browser_reload", #removed
 ]
@@ -57,7 +57,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # installed libraries
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     # installed libraries end
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -162,23 +161,21 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
 
 STATICFILES_DIRS = [
     BASE_DIR / "staticfiles",  # os.path.join(BASE_DIR, 'static')
 ]
 
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+from .cdn.conf import * # noqa
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-from .cdn.conf import * # noqa
+
+
 # ===================================================================
 # This is to send emails from django project
 EMAIL_HOST = os.environ.get("EMAIL_HOST")

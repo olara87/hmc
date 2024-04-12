@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Roboto:wght@400;700&display=swap");
+
+:root {
+    --honey-gold: #ffd166;
+    --lavender-mist: #d6bcc0;
+    --soft-sage: #a4dbab;
+    font-family: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    padding: 1rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.5em;
+}
+
+nav {
+    display: none;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    height: 12em;
+}
+
+.header {
+    font-size: 2em;
+}
+
+.subheader {
+    font-size: 1em;
+}
+
+.hero-cta {
+    height: 3.5em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.hero-img,
+.about-img {
+    width: 100%;
+}
+
+.hero-section,
+.about-section,
+.contact-section {
+    margin-bottom: 2.1875rem;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 12rem;
+}
+
+.about-left-col {
+    height: 15.5em;
+    padding: 2.1875rem 0;
+}
+
+.p-footer {
+    text-align: justify;
+}
+
+.ul-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.p-about {
+    text-align: justify;
+}
+
+.contact-section {
+    margin-top: 2.1875rem;
+}
+
+.contact-form {
+    height: 34.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.contact-form p {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+dialog {
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: auto;
+    width: 60%;
+    height: 20%;
+    text-align: center;
+}
