@@ -8,7 +8,7 @@ jobs:
   django_test:
     runs-on: ubuntu-latest
     defaults:
-      runs:
+      run:
         working-directory: ./hmc
     env:
       SECRET_KEY: WILL-NEED-TO-CHANGE-THIS-LATER
