@@ -10,7 +10,7 @@ on:
 
 jobs:
   test_django:
-    uses: ./.github/workflows/test-django.yaml
+    uses: olara87/hmc/.github/workflows/test-django.yaml@main
   build:
     runs-on: ubuntu-latest
     needs: [test_django_job]
