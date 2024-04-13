@@ -11,38 +11,36 @@ on:
 jobs:
   test_django:
     uses: hmc/.github/workflows/test-django.yaml@main
-  docker_build:
+  build:
     runs-on: ubuntu-latest
-    defaults:
-      runs:
-        working-directory: ./hmc
+    needs: [test_django_job]
     env:
-      SECRET_KEY: WILL-NEED-TO-CHANGE-THIS-LATER
+      CLUSTER_NAME: heicakes
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Install doctl
-      uses: digitalocean/action-doctl@v3
-      with:
-        token: ${{ secrets.DO_API_TOKEN_KEY }}
-    - name: Login to DO Container Regitry with short-lived creds
-      uses: doctl registry login --expiry-seconds 1200
-    - name: Build container image
-      working-directory: ./hmc
-      run: |
-        docker build -f Dockerfile \
-          -t registry.digitalocean.com/heicakes/heidy-makes-web:latest \
-          -t registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
-           .
-    - name: Push image
-      run: |
-        docker push registry.digitalocean.com/heicakes/heidy-makes-web --all-tags
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v3
+        with:
+          token: ${{ secrets.DO_API_TOKEN_KEY }}
+      - name: Login to DO Container Regitry with short-lived creds
+        uses: doctl registry login --expiry-seconds 1200
+      - name: Build container image
+        working-directory: ./hmc
+        run: |
+          docker build -f Dockerfile \
+            -t registry.digitalocean.com/heicakes/heidy-makes-web:latest \
+            -t registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
+            .
+      - name: Push image
+        run: |
+          docker push registry.digitalocean.com/heicakes/heidy-makes-web --all-tags
       - name: K8s cluster kubeconfig file with/ short-lived creds
         run: |
           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.CLUSTER_NAME }}
       - name: Update deployment secrets
         run: |
-          cat << EOF >> web/.env.prod
+          cat << EOF >> hmc/.env.prod
           SECRET_KEY=${{ secrets.SECRET_KEY }}
           LOCAL_IP=${{ secrets.LOCAL_IP }}
           LOCAL_HOST=${{ secrets.LOCAL_HOST }}
@@ -69,7 +67,7 @@ jobs:
           EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }}
           EOF
           kubectl delete secret heicakes-hmc-prod-env
-          kubectl create secret generic heicakes-hmc-prod-env --from-env-file=web/.env.prod
+          kubectl create secret generic heicakes-hmc-prod-env --from-env-file=hmc/.env.prod
       - name: Update Deployment image
         run: |
           kubectl set image deployment/heidy-makes-web-deployment heidy-makes-web=registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5}
