@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heidy-makes-web-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: heidy-makes-web-deployment
+  template:
+    metadata:
+      labels:
+        app: heidy-makes-web-deployment
+    spec:
+      containers:
+      - name: hmc
+        image: registry.digitalocean.com/heicakes/heidy-makes-web:latest
+        envFrom:
+          - secretRef:
+              name: heicakes-hmc-prod-env
+        env:
+          - name: PORT
+            value: "8001"
+        ports:
+        - containerPort: 8001
+      imagePullSecrets:
+        - name: heicakes
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: heidy-makes-web-service
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8001
+  selector:
+    app: heidy-makes-web-deployment

@@ -1,7 +1,9 @@
 .env.prod
-web/.env
+hmc/.env
 .DS_Store
 .kube/
+hmc/static
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
