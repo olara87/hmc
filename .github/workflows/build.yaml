@@ -33,7 +33,7 @@ jobs:
         docker build -f Dockerfile \
           -t registry.digitalocean.com/heicakes/heidy-makes-web:latest \
           -t registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
-          .
+           .
     - name: Push image
       run: |
         docker push registry.digitalocean.com/heicakes/heidy-makes-web --all-tags
