@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-  pull_requests:
+  pull_request:
     branches: [main]
-
+    
 jobs:
   test_django:
     uses: hmc/.github/workflows/test-django.yaml@main
