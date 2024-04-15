@@ -30,7 +30,8 @@ jobs:
       run: |
         docker build -f Dockerfile \
           -t registry.digitalocean.com/heicakes/heidy-makes-web:latest \
-          -t registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} .
+          -t registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5} \
+          .
     - name: Push image
       run: |
         docker push registry.digitalocean.com/heicakes/heidy-makes-web --all-tags
@@ -69,7 +70,7 @@ jobs:
         kubectl create secret generic heicakes-hmc-prod-env --from-env-file=hmc/.env.prod
     - name: Update Deployment image
       run: |
-        kubectl set image deployment/heidy-makes-web-deployment heidy-makes-web=registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5}
+        kubectl set image deployment/heidy-makes-web-deployment hmc=registry.digitalocean.com/heicakes/heidy-makes-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5}
     - name: Wait for rollout to finish
       run: |
         kubectl rollout status deployment/heidy-makes-web-deployment
