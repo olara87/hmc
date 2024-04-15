@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test_django]
     env:
-      CLUSTER_NAME: heicakes
+      CLUSTER_NAME: heicakess
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
