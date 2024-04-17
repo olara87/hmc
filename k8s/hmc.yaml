@@ -15,6 +15,7 @@ spec:
       containers:
       - name: hmc
         image: registry.digitalocean.com/heicakes/heidy-makes-web:latest
+        imagePullPolicy: Always
         envFrom:
           - secretRef:
               name: heicakes-hmc-prod-env
