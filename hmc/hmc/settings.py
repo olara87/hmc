@@ -176,8 +176,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "staticfiles",  # os.path.join(BASE_DIR, 'static')
 ]
 
-if not DEBUG:
-    from .cdn.conf import * # noqa
+from .cdn.conf import * # noqa
 
 # from .cdn.conf import (
 #         AWS_ACCESS_KEY_ID,
