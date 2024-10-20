@@ -2,24 +2,36 @@
 {% load static %}
 {% block title %}About{% endblock title %}
 {% block content %}
-<section class="about-section">
-    <div class="about-left-col">
-        <p class="p-about">
-            Welcome to our cozy bakery, where each treat is meticulously crafted
-            with care and quality ingredients for a delightful experience. From
-            pastries to cakes, our range of delicious options is sure to please.
-            We're dedicated to exceptional customer service, ensuring a warm,
-            personalized experience tailored to you. Indulge in our handmade
-            goodies, crafted with passion and attention to detail. Taste the
-            difference that comes from our commitment to excellence.
-        </p>
-    </div>
-    <div class="about-right-col">
-        <img
-            class="about-img"
-            src="{% static '/img/heidyprofile.jpg' %}"
-            alt="Heidy's photo."
-        />
-    </div>
-</section>
+    <section class="about-section">
+        <div class="container">
+            <div class="about-left-col">
+                <h1 class="about-header">About</h1>
+                <p class="p-about">
+                    Welcome to our cozy bakery, where each treat is meticulously
+                    crafted with care and quality ingredients for a delightful
+                experience. From pastries to cakes, our range of delicious
+                options is sure to please. We're dedicated to exceptional
+                customer service, ensuring a warm, personalized experience
+                tailored to you. Indulge in our handmade goodies, crafted with
+                passion and attention to detail. Taste the difference that comes
+                from our commitment to excellence.
+                </p>
+            </div>
+            <img
+                class="about-img"
+                src="{% static '/img/heidyprofile.jpg' %}"
+                alt="Heidy's photo."
+            />
+            <section class="about-cta">
+                <div class="about-left-col">
+                    <div class="about-cta">
+                        <a class="primary-cta" href="{% url 'core:contact' %}"
+                            >Order Now</a
+                        >
+                        <a href="https://{{ portfolio_link }}">Gallery</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
 {% endblock content %}

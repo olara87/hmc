@@ -1,43 +1,82 @@
 {% load static %}
+
 <div class="navbar">
-        <a href="/" class="logo"
-            >Hei<span>Cakes</span>
-        </a>
+    <div class="container">
+        <a href="{% url 'core:home' %}" class="logo"> Hei<span>Cakes</span> </a>
         <img
-            class="menu-open"
+            id="mobile-menu-open"
+            class="mobile-menu-open"
             role="navigation"
             aria-label="Main Navigation Menu"
-            id="mobile-cta"
-            class="mobile-menu"
-            src="{% static '/img/menu-open.svg' %}"
+            src="{% static 'img/menu-open.svg' %}"
             alt="Open navbar menu"
             width="24"
             height="24"
         />
-        <nav class="grid-navbar-item grid-navbar-child-2">
+        <nav>
             <img
-                id="mobile-exit"
-                class="mobile-menu"
-                src="{% static '/img/menu-close.svg' %}"
+                id="mobile-menu-close"
+                class="mobile-menu-close"
+                src="{% static 'img/menu-close.svg' %}"
                 alt="Close navbar menu"
                 width="24"
                 height="24"
             />
             <ul class="grid-nav">
-                <li class="grid-nav-item grid-nav-child-1">
-                    <a href="/">Home</a>
+                <li class="grid-nav-item">
+                    <a href="{% url 'core:home' %}">Home</a>
                 </li>
-                <li class="grid-nav-item grid-nav-child-2">
-                    <a id="about-section" href="#about">About</a>
+                <li class="grid-nav-item">
+                    <a id="about-section" href="{% url 'core:about' %}">About</a>
                 </li>
-                <li class="grid-nav-item grid-nav-child-3">
-                    <a href="https://www.instagram.com/heicakesusa/"
-                        >Gallery</a
-                    >
+                <li class="grid-nav-item">
+                    <a href="https://{{ portfolio_link }}">Gallery</a>
                 </li>
-                <li class="grid-nav-item grid-nav-child-4">
-                    <a href="" class="order-cta">Order</a>
+                <li class="grid-nav-item">
+                    <a href="{% url 'core:contact' %}" class="order-cta">Order</a>
                 </li>
             </ul>
         </nav>
+    </div>
 </div>
+
+{% comment %}
+<div class="navbar">
+    <a href="/" class="logo">Hei<span>Cakes</span> </a>
+    <img
+        class="menu-open"
+        role="navigation"
+        aria-label="Main Navigation Menu"
+        id="mobile-cta"
+        class="mobile-menu"
+        src="{% static '/img/menu-open.svg' %}"
+        alt="Open navbar menu"
+        width="24"
+        height="24"
+    />
+    <nav class="grid-navbar-item grid-navbar-child-2">
+        <img
+            id="mobile-exit"
+            class="mobile-menu"
+            src="{% static '/img/menu-close.svg' %}"
+            alt="Close navbar menu"
+            width="24"
+            height="24"
+        />
+        <ul class="grid-nav">
+            <li class="grid-nav-item grid-nav-child-1">
+                <a href="/">Home</a>
+            </li>
+            <li class="grid-nav-item grid-nav-child-2">
+                <a id="about-section" href="#about">About</a>
+            </li>
+            <li class="grid-nav-item grid-nav-child-3">
+                <a href="https://www.instagram.com/heicakesusa/">Gallery</a>
+            </li>
+            <li class="grid-nav-item grid-nav-child-4">
+                <a href="" class="order-cta">Order</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+{% endcomment %}

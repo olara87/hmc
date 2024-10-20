@@ -1,22 +1,13 @@
-// if (document.querySelector("[contact-form]")) {
-//     console.log("Hello Julian")
-//     const contactForm = document.querySelector("[contact-form]")
-//     const modal = document.querySelector("[data-modal]")
-//     // const modalText = document.getElementById("modal-text") //also added id to p tag inside dialog element. might need to remove this later.
-    
-//     contactForm.addEventListener("submit", e => {
-//         contactForm.querySelectorAll('input[required]').forEach((input) => {
-//             if (input.value.trim()) {
-//                 modal.style.display = "flex"
-//                 modal.style.flexDirection = "column"
-//                 modal.showModal()
-//             }
-//         })
-//     })
-// }
+const mobileCta = document.getElementById('mobile-menu-open');
+const mobileExit = document.getElementById('mobile-menu-close');
+const nav = document.querySelector('nav');
 
-// const modal = document.getElementById("modal")
-// const submitBtn = document.getElementById("submit")
-// submitBtn.addEventListener("submit", e => {
-//     modal.showModal()
-// })
+// Open the mobile menu
+mobileCta.addEventListener('click', () => {
+    nav.classList.add('open');
+});
+
+// Close the mobile menu
+mobileExit.addEventListener('click', () => {
+    nav.classList.remove('open');
+});

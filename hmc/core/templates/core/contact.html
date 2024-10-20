@@ -2,17 +2,12 @@
 {% load static %}
 {% block content %}
     <section class="contact-section">
-        {% if messages %}
-            <dialog data-modal backdrop="static" id="modal">
-                <p id="modal-text">Your form has been submitted. Thank you.</p>
-                <a href="{% url 'core:home' %}">Home</a>
-            </dialog>
-        {% endif %}
+        <div class="container">
             <form class="contact-form" method="POST" contact-form>
                 <h1>Contact Form</h1>
                 {% csrf_token %} {{form.as_p}}
                 <button type="submit" submit-button id="submit">Submit</button>
             </form>
-            <script src="{% static '/js/contact.js' %}" defer></script>
+        </div>
     </section>
 {% endblock content %}
