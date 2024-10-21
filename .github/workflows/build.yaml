@@ -73,8 +73,8 @@ jobs:
         COMPANY_WEBSITE=${{ secrets.COMPANY_WEBSITE }}
         EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }}
         EOF
-        kubectl delete secret hmc-hmc-prod-env
-        kubectl create secret generic hmc-hmc-prod-env --from-env-file=hmc/.env.prod
+        kubectl delete secret hmc-web-prod-env
+        kubectl create secret generic hmc-web-prod-env --from-env-file=hmc/.env.prod
     - name: Update Deployment image
       run: |
         kubectl set image deployment/hmc-web-deployment hmc=registry.digitalocean.com/hmc/hmc-web:${GITHUB_SHA::7}-${GITHUB_RUN_ID::5}
