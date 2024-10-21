@@ -21,4 +21,4 @@ jobs:
           doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ env.CLUSTER_NAME }}
       - name: Run rollout on Deployment
         run: |
-          kubectl rollout restart deployment/heidy-makes-web-deployment
+          kubectl rollout restart deployment/hmc-web-deployment
