@@ -72,6 +72,7 @@ jobs:
         EMAIL_HOST_COMPANY=${{ secrets.EMAIL_HOST_COMPANY }}
         COMPANY_WEBSITE=${{ secrets.COMPANY_WEBSITE }}
         EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }}
+        PORTFOLIO_LINK=${{ secrets.PORTFOLIO_LINK }}
         EOF
         kubectl delete secret hmc-web-prod-env
         kubectl create secret generic hmc-web-prod-env --from-env-file=hmc/.env.prod
